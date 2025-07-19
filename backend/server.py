@@ -219,7 +219,12 @@ async def update_cart_item(session_id: str, product_id: str, quantity: int):
     cart["updated_at"] = datetime.now()
     
     cart_collection.replace_one({"session_id": session_id}, cart)
-    return {"message": "Cart updated", "cart": cart}
+    
+    # Return cart without _id field
+    cart_response = cart.copy()
+    cart_response.pop("_id", None)  # Remove _id if it exists
+    
+    return {"message": "Cart updated", "cart": cart_response}
 
 @app.delete("/api/cart/{session_id}/remove/{product_id}")
 async def remove_from_cart(session_id: str, product_id: str):
