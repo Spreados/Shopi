@@ -207,10 +207,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Product Management API"
-    - "Shopping Cart API"
     - "Product Display and Catalog"
     - "Shopping Cart Functionality"
+    - "Checkout Process"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
