@@ -194,7 +194,11 @@ async def add_to_cart(session_id: str, product_id: str, quantity: int = 1):
         upsert=True
     )
     
-    return {"message": "Item added to cart", "cart": cart}
+    # Return cart without _id field
+    cart_response = cart.copy()
+    cart_response.pop("_id", None)  # Remove _id if it exists
+    
+    return {"message": "Item added to cart", "cart": cart_response}
 
 @app.put("/api/cart/{session_id}/update")
 async def update_cart_item(session_id: str, product_id: str, quantity: int):
